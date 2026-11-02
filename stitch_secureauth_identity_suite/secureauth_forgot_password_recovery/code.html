@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login - SecureAuth</title>
+<!-- Tailwind CSS CDN with Forms Plugin -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- FontAwesome Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script data-purpose="tailwind-config" id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Outfit"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#fff7ed',
+              100: '#ffedd5',
+              200: '#fed7aa',
+              300: '#fdba74',
+              400: '#fb923c',
+              500: '#f97316',
+              600: '#ea580c',
+              700: '#c2410c',
+              dark: '#2c1e19',
+            },
+            mascot: {
+              cream: '#fbe9db',
+              bead: '#5c3a21',
+              robe: '#ff6720',
+              leaf: '#b4d33c',
+            }
+          },
+          boxShadow: {
+            'glass': '0 20px 50px -12px rgba(234, 88, 12, 0.12), 0 8px 24px -4px rgba(0, 0, 0, 0.04)',
+            'mascot': '0 25px 50px -12px rgba(180, 83, 9, 0.3)',
+            'bead': 'inset -3px -3px 6px rgba(0,0,0,0.5), inset 2px 2px 5px rgba(255,255,255,0.4)',
+            'btn': '0 10px 25px -5px rgba(234, 88, 12, 0.45)',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '50%': { transform: 'translateY(-12px) rotate(1deg)' },
+            },
+            leafSway: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '50%': { transform: 'translateY(-8px) rotate(12deg)' },
+            },
+            wingFlapLeft: {
+              '0%, 100%': { transform: 'rotate(-4deg)' },
+              '50%': { transform: 'rotate(2deg)' },
+            },
+            wingFlapRight: {
+              '0%, 100%': { transform: 'rotate(4deg)' },
+              '50%': { transform: 'rotate(-2deg)' },
+            }
+          },
+          animation: {
+            'float-mascot': 'float 5s ease-in-out infinite',
+            'sway-leaf': 'leafSway 4s ease-in-out infinite',
+            'wing-left': 'wingFlapLeft 3.5s ease-in-out infinite',
+            'wing-right': 'wingFlapRight 3.5s ease-in-out infinite',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-background-and-depth">
+    /* Subtle Clay/3D depth gradients mirroring reference */
+    .bg-peach-glow {
+      background: radial-gradient(circle at 65% 45%, #fedecb 0%, #fbd5bd 35%, #fce2d0 70%, #f7d6be 100%);
+    }
+    
+    .glass-backdrop-panel {
+      background: rgba(255, 255, 255, 0.28);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1.5px solid rgba(255, 255, 255, 0.65);
+    }
+
+    .form-card-glass {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(32px);
+      -webkit-backdrop-filter: blur(32px);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+    }
+
+    /* 3D clay effect on beads and character parts */
+    .clay-surface {
+      background: linear-gradient(145deg, #fff0e2 0%, #f8cfb5 100%);
+      box-shadow: inset -6px -6px 14px rgba(199, 120, 80, 0.35), inset 6px 6px 14px rgba(255, 255, 255, 0.9);
+    }
+
+    .robe-gradient {
+      background: linear-gradient(135deg, #ff7a2b 0%, #ea580c 60%, #c2410c 100%);
+      box-shadow: inset 4px 4px 10px rgba(255, 210, 180, 0.4), inset -8px -8px 16px rgba(130, 35, 0, 0.35);
+    }
+
+    .bead-item {
+      background: radial-gradient(circle at 35% 30%, #875738 0%, #523118 60%, #351c0b 100%);
+      box-shadow: 2px 5px 8px rgba(70, 30, 10, 0.45), inset 1px 2px 3px rgba(255, 255, 255, 0.4);
+    }
+  </style>
+<meta content="web_blank" name="shell-type"/></head>
+<body class="min-h-screen bg-peach-glow text-gray-800 flex items-center justify-center p-3 sm:p-6 md:p-10 font-sans relative overflow-x-hidden selection:bg-brand-200 selection:text-brand-700">
+<!-- Ambient background decorative floating orbs mirroring composition -->
+<div class="fixed -bottom-24 -left-24 w-96 h-96 rounded-full bg-[#f8be9a]/40 blur-3xl pointer-events-none -z-10"></div>
+<div class="fixed top-12 right-20 w-80 h-80 rounded-full bg-[#fedcc5]/60 blur-2xl pointer-events-none -z-10"></div>
+<!-- BEGIN: MainContainer -->
+<!-- Outer Frosted Stage matching the wide backdrop glass container in the reference -->
+<main class="w-full max-w-6xl glass-backdrop-panel rounded-[36px] sm:rounded-[48px] p-4 sm:p-8 lg:p-12 shadow-2xl relative overflow-hidden my-auto" data-purpose="authentication-stage"><div class="flex flex-col w-full">
+<div class="relative w-full max-w-5xl mx-auto flex flex-col lg:flex-row items-stretch gap-8 lg:gap-12 py-2 sm:py-6">
+<!-- Left Architectural Column: Context, Trust Architecture & Interactive Stepper Matrix -->
+<div class="w-full lg:w-5/12 flex flex-col justify-between space-y-6">
+<div class="flex flex-col space-y-5">
+<!-- Security Protocol Identifier Pill -->
+<div class="inline-flex items-center gap-2 self-start bg-surface-container/80 px-3.5 py-1.5 rounded-full shadow-sm backdrop-blur-md">
+<span class="inline-block w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-tertiary-fixed tracking-wider uppercase">256-Bit Encrypted Recovery</span>
+</div>
+<!-- Identity & Header Block -->
+<div class="space-y-2">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-white text-xl" style="font-variation-settings: 'FILL' 1;">lock_reset</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest block">SecureAuth Guard</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface tracking-tight">Identity Vault</h2>
+</div>
+</div>
+<h1 class="font-display-hero text-headline-lg lg:text-display-hero text-on-surface tracking-tight mt-4">
+            Reset Account Credentials
+          </h1>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            Follow the zero-trust recovery workflow to safely authenticate and overwrite your encrypted account access key.
+          </p>
+</div>
+<!-- Dynamic 4-Step Interactive Progression Timeline -->
+<div class="mt-4 p-5 rounded-2xl bg-surface-container/60 backdrop-blur-md shadow-sm space-y-4">
+<div class="flex items-center justify-between pb-3">
+<span class="font-label-sm text-label-sm text-primary tracking-wider uppercase">Authentication Protocol</span>
+<span class="font-code-mono text-code-mono text-on-surface-variant" id="stepIndicatorLabel">Phase 01 / 04</span>
+</div>
+<div class="space-y-3" id="timelineList">
+<!-- Step 1 Item -->
+<button class="w-full text-left group flex items-start gap-3.5 p-3 rounded-xl transition-all duration-300 bg-surface-container-high/90 shadow-sm" id="navStep1" onclick="goToStep(1)" type="button">
+<div class="w-7 h-7 rounded-lg bg-primary-container flex items-center justify-center shrink-0 text-white font-code-mono text-xs font-bold transition-all" id="badgeStep1">
+                1
+              </div>
+<div class="min-w-0 flex-1">
+<div class="flex items-center justify-between">
+<p class="font-title-md text-body-md text-on-surface font-semibold truncate">Verify Identity Email</p>
+<span class="material-symbols-outlined text-sm text-primary" id="statusIcon1">arrow_forward_ios</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Provide registered workspace address</p>
+</div>
+</button>
+<!-- Step 2 Item -->
+<button class="w-full text-left group flex items-start gap-3.5 p-3 rounded-xl transition-all duration-300 hover:bg-surface-container/50 opacity-75" id="navStep2" onclick="goToStep(2)" type="button">
+<div class="w-7 h-7 rounded-lg bg-surface-variant flex items-center justify-center shrink-0 text-on-surface-variant font-code-mono text-xs font-bold" id="badgeStep2">
+                2
+              </div>
+<div class="min-w-0 flex-1">
+<div class="flex items-center justify-between">
+<p class="font-title-md text-body-md text-on-surface font-semibold truncate">6-Digit Email OTP</p>
+<span class="material-symbols-outlined text-sm text-on-surface-variant opacity-0" id="statusIcon2">lock</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Single-use cryptotoken exchange</p>
+</div>
+</button>
+<!-- Step 3 Item -->
+<button class="w-full text-left group flex items-start gap-3.5 p-3 rounded-xl transition-all duration-300 hover:bg-surface-container/50 opacity-75" id="navStep3" onclick="goToStep(3)" type="button">
+<div class="w-7 h-7 rounded-lg bg-surface-variant flex items-center justify-center shrink-0 text-on-surface-variant font-code-mono text-xs font-bold" id="badgeStep3">
+                3
+              </div>
+<div class="min-w-0 flex-1">
+<div class="flex items-center justify-between">
+<p class="font-title-md text-body-md text-on-surface font-semibold truncate">Create Passphrase</p>
+<span class="material-symbols-outlined text-sm text-on-surface-variant opacity-0" id="statusIcon3">shield</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Entropy validation &amp; hash rewrite</p>
+</div>
+</button>
+<!-- Step 4 Item -->
+<button class="w-full text-left group flex items-start gap-3.5 p-3 rounded-xl transition-all duration-300 hover:bg-surface-container/50 opacity-75" id="navStep4" onclick="goToStep(4)" type="button">
+<div class="w-7 h-7 rounded-lg bg-surface-variant flex items-center justify-center shrink-0 text-on-surface-variant font-code-mono text-xs font-bold" id="badgeStep4">
+                4
+              </div>
+<div class="min-w-0 flex-1">
+<div class="flex items-center justify-between">
+<p class="font-title-md text-body-md text-on-surface font-semibold truncate">Access Restored</p>
+<span class="material-symbols-outlined text-sm text-on-surface-variant opacity-0" id="statusIcon4">check_circle</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Confirmed sync &amp; automatic token rotation</p>
+</div>
+</button>
+</div>
+</div>
+</div>
+<!-- Trust Stamp & Hardware Security Chip -->
+<div class="p-4 rounded-xl bg-surface-container-low/70 backdrop-blur-md flex items-center gap-3.5 shadow-sm">
+<div class="p-2.5 rounded-lg bg-surface-container flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-xl">vpn_key_alert</span>
+</div>
+<div class="text-xs">
+<p class="font-label-md text-on-surface font-medium">FIDO2 &amp; WebAuthn Ready</p>
+<p class="font-body-sm text-on-surface-variant">Tokens expire automatically after 15 minutes of inactivity.</p>
+</div>
+</div>
+</div>
+<!-- Right Interactive Column: Fluid Glassmorphic Form Card -->
+<div class="w-full lg:w-7/12 flex flex-col">
+<div class="bg-surface-container/90 backdrop-blur-2xl rounded-3xl p-6 sm:p-10 shadow-2xl flex flex-col justify-between min-h-[580px] relative overflow-hidden">
+<!-- Subtle Ambient Inner Aura -->
+<div class="absolute -top-24 -right-24 w-60 h-60 rounded-full bg-primary-container/10 blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-24 -left-24 w-60 h-60 rounded-full bg-tertiary/10 blur-3xl pointer-events-none"></div>
+<!-- ======================= STEP 1: ENTER EMAIL ======================= -->
+<div class="step-panel flex flex-col justify-between h-full transition-all duration-500" id="stepPanel1">
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm px-3 py-1 rounded-full bg-primary/20 text-on-primary-fixed uppercase tracking-wider">
+                Step 1 of 4
+              </span>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+                Public Key Exchange
+              </span>
+</div>
+<div class="space-y-2">
+<h3 class="font-headline-md text-headline-md text-on-surface tracking-tight">Enter your recovery email</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                We'll transmit a secure 6-digit one-time authorization code to initiate your credentials rotation.
+              </p>
+</div>
+<!-- Email Field -->
+<div class="space-y-2 pt-2">
+<label class="block font-label-md text-label-md text-on-surface" for="recoveryEmail">Registered Work Email</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl pointer-events-none">
+                  mail
+                </span>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder:text-on-surface-variant/50 font-body-md text-body-md rounded-xl pl-12 pr-10 py-3.5 focus:outline-none transition-all duration-200" id="recoveryEmail" placeholder="name@company.com" type="email" value="alex.morgan@uptoskills.com"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-tertiary text-lg" title="Syntax Verified">
+                  verified
+                </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1.5 pt-1">
+<span class="material-symbols-outlined text-sm text-tertiary">info</span>
+                Ensure you have active inbox access on this or another trusted device.
+              </p>
+</div>
+<!-- Notice Box -->
+<div class="p-4 rounded-xl bg-surface-container-low/90 space-y-1.5">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-base">security</span>
+<span class="font-label-sm text-label-sm font-semibold uppercase tracking-wider">Zero-Trust Notice</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                SecureAuth never requests verification codes via voice calls, SMS, or direct chat. Never share authentication payloads.
+              </p>
+</div>
+</div>
+<div class="pt-8 space-y-4">
+<button class="w-full py-3.5 px-6 rounded-xl bg-primary-container text-white font-title-md text-title-md font-semibold shadow-lg hover:brightness-110 active:scale-[0.99] transition-all flex items-center justify-center gap-2" onclick="goToStep(2)" type="button">
+<span>Send Recovery Code</span>
+<span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+<div class="flex items-center justify-between text-xs pt-2">
+<a class="font-label-md text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-base">arrow_back</span> Back to Sign In
+              </a>
+<a class="font-label-md text-tertiary hover:underline" href="#">
+                Lost access to inbox?
+              </a>
+</div>
+</div>
+</div>
+<!-- ======================= STEP 2: ENTER OTP ======================= -->
+<div class="step-panel hidden flex-col justify-between h-full transition-all duration-500" id="stepPanel2">
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm px-3 py-1 rounded-full bg-primary/20 text-on-primary-fixed uppercase tracking-wider">
+                Step 2 of 4
+              </span>
+<span class="font-code-mono text-body-sm text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-base">timer</span>
+                Expires in <span class="font-bold" id="otpCountdown">14:59</span>
+</span>
+</div>
+<div class="space-y-2">
+<h3 class="font-headline-md text-headline-md text-on-surface tracking-tight">Verify authorization code</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                Enter the 6-digit cryptographic security code dispatched to <strong class="text-on-surface" id="targetEmailLabel">alex.morgan@uptoskills.com</strong>.
+              </p>
+</div>
+<!-- OTP Input Blocks -->
+<div class="py-4">
+<label class="block font-label-md text-label-md text-on-surface mb-3">Six-Digit Recovery Token</label>
+<div class="flex items-center justify-between gap-2 sm:gap-3" id="otpContainer">
+<input class="otp-box w-12 sm:w-14 h-14 text-center font-code-mono text-2xl font-bold rounded-xl bg-surface-container-lowest text-on-surface focus:outline-none transition-all shadow-inner" maxlength="1" type="text" value="7"/>
+<input class="otp-box w-12 sm:w-14 h-14 text-center font-code-mono text-2xl font-bold rounded-xl bg-surface-container-lowest text-on-surface focus:outline-none transition-all shadow-inner" maxlength="1" type="text" value="4"/>
+<input class="otp-box w-12 sm:w-14 h-14 text-center font-code-mono text-2xl font-bold rounded-xl bg-surface-container-lowest text-on-surface focus:outline-none transition-all shadow-inner" maxlength="1" type="text" value="2"/>
+<input class="otp-box w-12 sm:w-14 h-14 text-center font-code-mono text-2xl font-bold rounded-xl bg-surface-container-lowest text-on-surface focus:outline-none transition-all shadow-inner" maxlength="1" type="text" value="9"/>
+<input class="otp-box w-12 sm:w-14 h-14 text-center font-code-mono text-2xl font-bold rounded-xl bg-surface-container-lowest text-on-surface focus:outline-none transition-all shadow-inner" maxlength="1" type="text" value="1"/>
+<input class="otp-box w-12 sm:w-14 h-14 text-center font-code-mono text-2xl font-bold rounded-xl bg-surface-container-lowest text-on-surface focus:outline-none transition-all shadow-inner" maxlength="1" placeholder="•" type="text" value=""/>
+</div>
+</div>
+<div class="flex items-center justify-between text-xs p-3.5 rounded-xl bg-surface-container-low/70">
+<span class="font-body-sm text-on-surface-variant">Didn't receive the passcode?</span>
+<button class="font-label-md text-primary font-semibold hover:underline flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-sm">refresh</span> Resend Code
+              </button>
+</div>
+</div>
+<div class="pt-8 space-y-4">
+<button class="w-full py-3.5 px-6 rounded-xl bg-primary-container text-white font-title-md text-title-md font-semibold shadow-lg hover:brightness-110 active:scale-[0.99] transition-all flex items-center justify-center gap-2" onclick="goToStep(3)" type="button">
+<span>Validate Token &amp; Continue</span>
+<span class="material-symbols-outlined text-lg">check_circle</span>
+</button>
+<button class="w-full py-2.5 text-center font-label-md text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center gap-1.5" onclick="goToStep(1)" type="button">
+<span class="material-symbols-outlined text-base">arrow_back</span> Change Email Address
+            </button>
+</div>
+</div>
+<!-- ======================= STEP 3: RESET PASSWORD ======================= -->
+<div class="step-panel hidden flex-col justify-between h-full transition-all duration-500" id="stepPanel3">
+<div class="space-y-5">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm px-3 py-1 rounded-full bg-primary/20 text-on-primary-fixed uppercase tracking-wider">
+                Step 3 of 4
+              </span>
+<span class="font-label-sm text-label-sm text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-base">enhanced_encryption</span>
+                Client Hash Keying
+              </span>
+</div>
+<div class="space-y-1.5">
+<h3 class="font-headline-md text-headline-md text-on-surface tracking-tight">Create your new password</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                Define a high-entropy passphrase to secure your decentralized sessions.
+              </p>
+</div>
+<!-- Password Fields -->
+<div class="space-y-4 pt-1">
+<div class="space-y-1.5">
+<label class="block font-label-md text-label-md text-on-surface" for="newPassword">New Passphrase</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl pointer-events-none">
+                    key
+                  </span>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder:text-on-surface-variant/50 font-body-md text-body-md rounded-xl pl-12 pr-12 py-3 focus:outline-none transition-all" id="newPassword" placeholder="Enter min. 12 characters" type="password" value="K9#mQ!9vLp@240"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface" type="button">
+<span class="material-symbols-outlined text-lg">visibility</span>
+</button>
+</div>
+</div>
+<!-- Entropy Indicator Bar -->
+<div class="space-y-1.5 p-3 rounded-xl bg-surface-container-low/70">
+<div class="flex items-center justify-between text-xs">
+<span class="font-label-sm text-on-surface-variant">Entropy Strength:</span>
+<span class="font-label-sm text-tertiary font-bold">Strong (84/100)</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden flex gap-1">
+<div class="h-full w-1/3 bg-tertiary rounded-full"></div>
+<div class="h-full w-1/3 bg-tertiary rounded-full"></div>
+<div class="h-full w-1/4 bg-tertiary rounded-full"></div>
+</div>
+<div class="grid grid-cols-2 gap-2 pt-2 text-[11px] text-on-surface-variant">
+<span class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-xs">check</span> 12+ Characters
+                  </span>
+<span class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-xs">check</span> Numbers &amp; Symbols
+                  </span>
+<span class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-xs">check</span> Mixed Capitalization
+                  </span>
+<span class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-xs">check</span> Not in breach registry
+                  </span>
+</div>
+</div>
+<!-- Confirm Password -->
+<div class="space-y-1.5">
+<label class="block font-label-md text-label-md text-on-surface" for="confirmPassword">Confirm Passphrase</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl pointer-events-none">swipe_left_alt</span>
+<input class="w-full bg-surface-container-lowest text-on-surface placeholder:text-on-surface-variant/50 font-body-md text-body-md rounded-xl pl-12 pr-12 py-3 focus:outline-none transition-all" id="confirmPassword" placeholder="Repeat your password" type="password" value="K9#mQ!9vLp@240"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-tertiary text-lg">
+                    check
+                  </span>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-6 space-y-3">
+<button class="w-full py-3.5 px-6 rounded-xl bg-primary-container text-white font-title-md text-title-md font-semibold shadow-lg hover:brightness-110 active:scale-[0.99] transition-all flex items-center justify-center gap-2" onclick="goToStep(4)" type="button">
+<span>Commit Password Update</span>
+<span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+<button class="w-full py-2 text-center font-label-md text-on-surface-variant hover:text-on-surface transition-colors" onclick="goToStep(2)" type="button">
+              Back to Verification
+            </button>
+</div>
+</div>
+<!-- ======================= STEP 4: SUCCESS CONFIRMATION ======================= -->
+<div class="step-panel hidden flex-col justify-between h-full transition-all duration-500 text-center" id="stepPanel4">
+<div class="space-y-6 my-auto py-6">
+<!-- Animated Success Icon Badge -->
+<div class="relative mx-auto w-20 h-20">
+<div class="absolute inset-0 rounded-full bg-tertiary/20 animate-ping"></div>
+<div class="relative w-20 h-20 rounded-full bg-surface-container flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-tertiary text-4xl" style="font-variation-settings: 'FILL' 1;">
+                  check_circle
+                </span>
+</div>
+</div>
+<div class="space-y-2 max-w-md mx-auto">
+<span class="font-label-sm text-label-sm px-3.5 py-1 rounded-full bg-tertiary/20 text-tertiary uppercase tracking-wider">
+                Sync Completed
+              </span>
+<h3 class="font-headline-lg text-headline-md sm:text-headline-lg text-on-surface tracking-tight pt-1">
+                Password Successfully Reset!
+              </h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Your cryptographic credentials have been refreshed across all cluster regions. All prior browser tokens have been revoked for your safety.
+              </p>
+</div>
+<!-- Audit Snapshot Pill -->
+<div class="max-w-md mx-auto p-4 rounded-2xl bg-surface-container-low/80 text-left space-y-2">
+<div class="flex items-center justify-between text-xs">
+<span class="font-label-sm text-on-surface-variant">Account:</span>
+<span class="font-code-mono text-on-surface">alex.morgan@uptoskills.com</span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<span class="font-label-sm text-on-surface-variant">Revocation Scope:</span>
+<span class="font-body-sm text-primary font-medium">3 active sessions terminated</span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<span class="font-label-sm text-on-surface-variant">Timestamp:</span>
+<span class="font-code-mono text-on-surface-variant" id="syncTimestamp">Just now (UTC+0)</span>
+</div>
+</div>
+</div>
+<div class="pt-6 space-y-3">
+<a class="w-full py-3.5 px-6 rounded-xl bg-primary-container text-white font-title-md text-title-md font-semibold shadow-lg hover:brightness-110 active:scale-[0.99] transition-all flex items-center justify-center gap-2" href="#">
+<span>Return to Sign In</span>
+<span class="material-symbols-outlined text-lg">login</span>
+</a>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+              You will need to sign back in with your updated passphrase.
+            </p>
+</div>
+</div>
+</div>
+<!-- Footer Micro-bar -->
+<div class="mt-4 flex flex-wrap items-center justify-between gap-3 px-3 text-xs text-on-surface-variant/80">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Zero-Knowledge Vault
+          </span>
+<span class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span> TLS 1.3 Strict
+          </span>
+</div>
+<div class="flex items-center gap-3">
+<a class="hover:text-on-surface transition-colors" href="#">Incident Support</a>
+<span>•</span>
+<a class="hover:text-on-surface transition-colors" href="#">Privacy Policy</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function goToStep(stepNumber) {
+    // Hide all step panels
+    for (let i = 1; i <= 4; i++) {
+      const panel = document.getElementById('stepPanel' + i);
+      const navItem = document.getElementById('navStep' + i);
+      const badge = document.getElementById('badgeStep' + i);
+      const statusIcon = document.getElementById('statusIcon' + i);
+
+      if (panel) {
+        panel.classList.add('hidden');
+        panel.classList.remove('flex');
+      }
+
+      if (navItem && badge && statusIcon) {
+        if (i < stepNumber) {
+          // Completed step style
+          navItem.className = 'w-full text-left group flex items-start gap-3.5 p-3 rounded-xl transition-all duration-300 bg-surface-container/40 opacity-90 cursor-pointer';
+          badge.className = 'w-7 h-7 rounded-lg bg-tertiary-container flex items-center justify-center shrink-0 text-white font-code-mono text-xs font-bold';
+          badge.innerHTML = '<span class="material-symbols-outlined text-sm">check</span>';
+          statusIcon.className = 'material-symbols-outlined text-sm text-tertiary';
+          statusIcon.innerText = 'check';
+        } else if (i === stepNumber) {
+          // Active step style
+          navItem.className = 'w-full text-left group flex items-start gap-3.5 p-3 rounded-xl transition-all duration-300 bg-surface-container-high/90 shadow-sm cursor-pointer';
+          badge.className = 'w-7 h-7 rounded-lg bg-primary-container flex items-center justify-center shrink-0 text-white font-code-mono text-xs font-bold';
+          badge.innerText = i;
+          statusIcon.className = 'material-symbols-outlined text-sm text-primary';
+          statusIcon.innerText = 'arrow_forward_ios';
+        } else {
+          // Future step style
+          navItem.className = 'w-full text-left group flex items-start gap-3.5 p-3 rounded-xl transition-all duration-300 hover:bg-surface-container/50 opacity-60 cursor-pointer';
+          badge.className = 'w-7 h-7 rounded-lg bg-surface-variant flex items-center justify-center shrink-0 text-on-surface-variant font-code-mono text-xs font-bold';
+          badge.innerText = i;
+          statusIcon.className = 'material-symbols-outlined text-sm text-on-surface-variant opacity-0';
+        }
+      }
+    }
+
+    // Reveal selected step panel
+    const activePanel = document.getElementById('stepPanel' + stepNumber);
+    if (activePanel) {
+      activePanel.classList.remove('hidden');
+      activePanel.classList.add('flex');
+    }
+
+    // Update indicator label
+    const label = document.getElementById('stepIndicatorLabel');
+    if (label) {
+      label.innerText = 'Phase 0' + stepNumber + ' / 04';
+    }
+
+    // Set updated email preview in Step 2 if entered
+    const emailInput = document.getElementById('recoveryEmail');
+    const targetLabel = document.getElementById('targetEmailLabel');
+    if (emailInput && targetLabel && emailInput.value) {
+      targetLabel.innerText = emailInput.value;
+    }
+  }
+
+  // OTP auto-advance support
+  document.addEventListener('DOMContentLoaded', () => {
+    const otpBoxes = document.querySelectorAll('.otp-box');
+    otpBoxes.forEach((box, index) => {
+      box.addEventListener('keyup', (e) => {
+        if (e.key >= '0' && e.key <= '9' && box.value) {
+          if (index < otpBoxes.length - 1) {
+            otpBoxes[index + 1].focus();
+          }
+        } else if (e.key === 'Backspace' && !box.value) {
+          if (index > 0) {
+            otpBoxes[index - 1].focus();
+          }
+        }
+      });
+    });
+  });
+</script></main>
+<!-- END: MainContainer -->
+<!-- BEGIN: InteractiveScripts -->
+<!-- Password visibility toggle interaction -->
+<script data-purpose="password-visibility-handler">
+    document.addEventListener('DOMContentLoaded', () => {
+      const togglePasswordBtn = document.getElementById('togglePassword');
+      const passwordInput = document.getElementById('password');
+      const toggleIcon = document.getElementById('toggleIcon');
+
+      if (togglePasswordBtn && passwordInput && toggleIcon) {
+        togglePasswordBtn.addEventListener('click', () => {
+          const isPassword = passwordInput.getAttribute('type') === 'password';
+          passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+          
+          if (isPassword) {
+            toggleIcon.classList.remove('fa-eye-slash');
+            toggleIcon.classList.add('fa-eye');
+          } else {
+            toggleIcon.classList.remove('fa-eye');
+            toggleIcon.classList.add('fa-eye-slash');
+          }
+        });
+      }
+    });
+  </script>
+<!-- END: InteractiveScripts -->
+</body></html>

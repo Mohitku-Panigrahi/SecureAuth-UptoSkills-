@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login - SecureAuth</title>
+<!-- Tailwind CSS CDN with Forms Plugin -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- FontAwesome Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script data-purpose="tailwind-config" id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Outfit"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#fff7ed',
+              100: '#ffedd5',
+              200: '#fed7aa',
+              300: '#fdba74',
+              400: '#fb923c',
+              500: '#f97316',
+              600: '#ea580c',
+              700: '#c2410c',
+              dark: '#2c1e19',
+            },
+            mascot: {
+              cream: '#fbe9db',
+              bead: '#5c3a21',
+              robe: '#ff6720',
+              leaf: '#b4d33c',
+            }
+          },
+          boxShadow: {
+            'glass': '0 20px 50px -12px rgba(234, 88, 12, 0.12), 0 8px 24px -4px rgba(0, 0, 0, 0.04)',
+            'mascot': '0 25px 50px -12px rgba(180, 83, 9, 0.3)',
+            'bead': 'inset -3px -3px 6px rgba(0,0,0,0.5), inset 2px 2px 5px rgba(255,255,255,0.4)',
+            'btn': '0 10px 25px -5px rgba(234, 88, 12, 0.45)',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '50%': { transform: 'translateY(-12px) rotate(1deg)' },
+            },
+            leafSway: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '50%': { transform: 'translateY(-8px) rotate(12deg)' },
+            },
+            wingFlapLeft: {
+              '0%, 100%': { transform: 'rotate(-4deg)' },
+              '50%': { transform: 'rotate(2deg)' },
+            },
+            wingFlapRight: {
+              '0%, 100%': { transform: 'rotate(4deg)' },
+              '50%': { transform: 'rotate(-2deg)' },
+            }
+          },
+          animation: {
+            'float-mascot': 'float 5s ease-in-out infinite',
+            'sway-leaf': 'leafSway 4s ease-in-out infinite',
+            'wing-left': 'wingFlapLeft 3.5s ease-in-out infinite',
+            'wing-right': 'wingFlapRight 3.5s ease-in-out infinite',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-background-and-depth">
+    /* Subtle Clay/3D depth gradients mirroring reference */
+    .bg-peach-glow {
+      background: radial-gradient(circle at 65% 45%, #fedecb 0%, #fbd5bd 35%, #fce2d0 70%, #f7d6be 100%);
+    }
+    
+    .glass-backdrop-panel {
+      background: rgba(255, 255, 255, 0.28);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1.5px solid rgba(255, 255, 255, 0.65);
+    }
+
+    .form-card-glass {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(32px);
+      -webkit-backdrop-filter: blur(32px);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+    }
+
+    /* 3D clay effect on beads and character parts */
+    .clay-surface {
+      background: linear-gradient(145deg, #fff0e2 0%, #f8cfb5 100%);
+      box-shadow: inset -6px -6px 14px rgba(199, 120, 80, 0.35), inset 6px 6px 14px rgba(255, 255, 255, 0.9);
+    }
+
+    .robe-gradient {
+      background: linear-gradient(135deg, #ff7a2b 0%, #ea580c 60%, #c2410c 100%);
+      box-shadow: inset 4px 4px 10px rgba(255, 210, 180, 0.4), inset -8px -8px 16px rgba(130, 35, 0, 0.35);
+    }
+
+    .bead-item {
+      background: radial-gradient(circle at 35% 30%, #875738 0%, #523118 60%, #351c0b 100%);
+      box-shadow: 2px 5px 8px rgba(70, 30, 10, 0.45), inset 1px 2px 3px rgba(255, 255, 255, 0.4);
+    }
+  </style>
+<meta content="web_blank" name="shell-type"/></head>
+<body class="min-h-screen bg-peach-glow text-gray-800 flex items-center justify-center p-3 sm:p-6 md:p-10 font-sans relative overflow-x-hidden selection:bg-brand-200 selection:text-brand-700">
+<!-- Ambient background decorative floating orbs mirroring composition -->
+<div class="fixed -bottom-24 -left-24 w-96 h-96 rounded-full bg-[#f8be9a]/40 blur-3xl pointer-events-none -z-10"></div>
+<div class="fixed top-12 right-20 w-80 h-80 rounded-full bg-[#fedcc5]/60 blur-2xl pointer-events-none -z-10"></div>
+<!-- BEGIN: MainContainer -->
+<!-- Outer Frosted Stage matching the wide backdrop glass container in the reference -->
+<main class="w-full max-w-6xl glass-backdrop-panel rounded-[36px] sm:rounded-[48px] p-4 sm:p-8 lg:p-12 shadow-2xl relative overflow-hidden my-auto" data-purpose="authentication-stage"><div class="flex flex-col w-full">
+<div class="relative w-full overflow-hidden rounded-[32px] bg-surface-container-low/80 p-4 sm:p-8 lg:p-10 shadow-2xl backdrop-blur-2xl">
+<!-- Ambient organic light orbs matching login visual palette -->
+<div class="pointer-events-none absolute -top-24 -left-20 h-72 w-72 rounded-full bg-primary-container/20 blur-3xl"></div>
+<div class="pointer-events-none absolute -bottom-24 right-10 h-80 w-80 rounded-full bg-tertiary-container/15 blur-3xl"></div>
+<div class="pointer-events-none absolute top-1/2 left-1/3 h-56 w-56 -translate-y-1/2 rounded-full bg-primary/10 blur-2xl"></div>
+<div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+<!-- LEFT COLUMN: Registration Form -->
+<div class="lg:col-span-7 flex flex-col justify-center">
+<!-- Header Branding & Security Credential -->
+<div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+<div class="flex items-center gap-3">
+<div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-primary-container text-surface-container-lowest shadow-lg shadow-primary-container/30">
+<span class="material-symbols-outlined text-[24px]">shield_person</span>
+</div>
+<div>
+<span class="font-headline-sm text-headline-sm text-on-surface tracking-tight block">SecureAuth</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Access Platform</span>
+</div>
+</div>
+<div class="inline-flex items-center gap-1.5 rounded-full bg-surface-container-high px-3 py-1 text-on-surface">
+<span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+<span class="font-code-mono text-code-mono text-[11px] text-tertiary">256-BIT ENCRYPTED</span>
+</div>
+</div>
+<!-- Title & Subtitle -->
+<div class="mb-6">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Create Account</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1.5">Join SecureAuth to safeguard your profile and manage access seamlessly.</p>
+</div>
+<!-- Registration Form Inputs -->
+<form class="space-y-4" onsubmit="event.preventDefault();">
+<!-- Full Name -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5" for="fullName">Full Name</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3.5 text-on-surface-variant text-[20px] pointer-events-none">person</span>
+<input class="w-full h-11 pl-11 pr-4 rounded-xl bg-surface-container-highest text-on-surface font-body-md text-body-md placeholder:text-on-surface-variant/60 outline-none transition-all duration-200 focus:bg-surface-container-high" id="fullName" placeholder="Alex Morgan" type="text"/>
+</div>
+</div>
+<!-- Email Address -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5" for="email">Email Address</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3.5 text-on-surface-variant text-[20px] pointer-events-none">mail</span>
+<input class="w-full h-11 pl-11 pr-4 rounded-xl bg-surface-container-highest text-on-surface font-body-md text-body-md placeholder:text-on-surface-variant/60 outline-none transition-all duration-200 focus:bg-surface-container-high" id="email" placeholder="alex.morgan@uptoskills.com" type="email"/>
+</div>
+</div>
+<!-- Password with Interactive Toggle -->
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<label class="font-label-md text-label-md text-on-surface" for="regPassword">Password</label>
+<span class="font-label-sm text-label-sm text-tertiary">Entropy: High</span>
+</div>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3.5 text-on-surface-variant text-[20px] pointer-events-none">lock</span>
+<input class="w-full h-11 pl-11 pr-11 rounded-xl bg-surface-container-highest text-on-surface font-body-md text-body-md placeholder:text-on-surface-variant/60 outline-none transition-all duration-200 focus:bg-surface-container-high" id="regPassword" placeholder="Create secure passphrase" type="password" value="SereneShield#2025"/>
+<button aria-label="Toggle password view" class="absolute right-3.5 text-on-surface-variant hover:text-on-surface transition-colors" id="toggleRegPassword" type="button">
+<span class="material-symbols-outlined text-[20px]" id="regEyeIcon">visibility</span>
+</button>
+</div>
+<!-- Password Strength Bar (4 Segments) -->
+<div class="mt-2.5 space-y-2">
+<div class="grid grid-cols-4 gap-1.5 h-1.5 w-full">
+<div class="h-full rounded-full bg-emerald-400"></div>
+<div class="h-full rounded-full bg-emerald-400"></div>
+<div class="h-full rounded-full bg-emerald-400"></div>
+<div class="h-full rounded-full bg-emerald-400/50"></div>
+</div>
+<div class="flex flex-wrap items-center justify-between text-on-surface-variant font-body-sm text-body-sm pt-0.5">
+<span class="text-emerald-300 font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">verified</span> Strong password
+                </span>
+<span class="font-code-mono text-code-mono text-[11px]">8+ chars • 1 number • 1 symbol</span>
+</div>
+</div>
+</div>
+<!-- Confirm Password -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5" for="confirmPassword">Confirm Password</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3.5 text-on-surface-variant text-[20px] pointer-events-none">verified_user</span>
+<input class="w-full h-11 pl-11 pr-11 rounded-xl bg-surface-container-highest text-on-surface font-body-md text-body-md placeholder:text-on-surface-variant/60 outline-none transition-all duration-200 focus:bg-surface-container-high" id="confirmPassword" placeholder="Repeat passphrase" type="password" value="SereneShield#2025"/>
+<span class="material-symbols-outlined absolute right-3.5 text-emerald-400 text-[20px]">check_circle</span>
+</div>
+<p class="font-label-sm text-label-sm text-emerald-400 mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">done_all</span> Passwords match
+            </p>
+</div>
+<!-- Terms and Conditions Checkbox -->
+<div class="pt-1">
+<label class="flex items-start gap-2.5 cursor-pointer select-none">
+<input checked="" class="mt-1 h-4 w-4 rounded bg-surface-container-high text-primary-container focus:ring-0 cursor-pointer" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant leading-tight">
+                I agree to the <a class="text-primary underline hover:text-primary-fixed" href="#">Terms of Service</a> and <a class="text-primary underline hover:text-primary-fixed" href="#">Privacy Policy</a>, including device telemetry verification.
+              </span>
+</label>
+</div>
+<!-- Primary Submit CTA -->
+<div class="pt-2">
+<button class="w-full h-12 rounded-xl bg-primary-container text-on-primary-fixed font-title-md text-title-md font-semibold shadow-lg shadow-primary-container/35 hover:brightness-110 active:scale-[0.99] transition-all duration-150 flex items-center justify-center gap-2" type="submit">
+<span>Create Account</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+<!-- Social SSO Section -->
+<div class="pt-2">
+<div class="relative flex items-center justify-center">
+<div class="w-full h-px bg-surface-variant"></div>
+<span class="absolute bg-surface-container-low px-3 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
+                Or Register With
+              </span>
+</div>
+<div class="grid grid-cols-3 gap-3 mt-4">
+<!-- Google -->
+<button aria-label="Register with Google" class="h-10 rounded-xl bg-surface-container-highest hover:bg-surface-container-high text-on-surface flex items-center justify-center gap-2 transition-colors" type="button">
+<i class="fa-brands fa-google text-[16px] text-red-400"></i>
+<span class="font-label-md text-label-md hidden sm:inline">Google</span>
+</button>
+<!-- GitHub -->
+<button aria-label="Register with GitHub" class="h-10 rounded-xl bg-surface-container-highest hover:bg-surface-container-high text-on-surface flex items-center justify-center gap-2 transition-colors" type="button">
+<i class="fa-brands fa-github text-[16px] text-on-surface"></i>
+<span class="font-label-md text-label-md hidden sm:inline">GitHub</span>
+</button>
+<!-- Apple -->
+<button aria-label="Register with Apple" class="h-10 rounded-xl bg-surface-container-highest hover:bg-surface-container-high text-on-surface flex items-center justify-center gap-2 transition-colors" type="button">
+<i class="fa-brands fa-apple text-[17px] text-on-surface"></i>
+<span class="font-label-md text-label-md hidden sm:inline">Apple</span>
+</button>
+</div>
+</div>
+<!-- Sign in link -->
+<div class="text-center pt-2">
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Already have an account? 
+              <a class="text-primary font-semibold hover:underline ml-1" href="#">Sign in</a>
+</p>
+</div>
+</form>
+</div>
+<!-- RIGHT COLUMN: Monk Mascot & Visual Storytelling -->
+<div class="lg:col-span-5 flex flex-col items-center justify-center relative">
+<!-- Subtle Frosted Backdrop Card for Mascot Stage -->
+<div class="relative w-full max-w-md rounded-3xl bg-surface-container/60 p-6 sm:p-8 flex flex-col items-center text-center shadow-xl">
+<!-- Floating Leaf Petals (SVG) -->
+<div class="absolute -top-3 left-6 animate-sway-leaf text-lime-400 opacity-80 pointer-events-none">
+<svg fill="currentColor" height="24" viewbox="0 0 24 24" width="24">
+<path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"></path>
+</svg>
+</div>
+<div class="absolute top-12 right-6 animate-sway-leaf text-lime-300 opacity-70 pointer-events-none" style="animation-delay: 1.5s;">
+<svg fill="currentColor" height="18" viewbox="0 0 24 24" width="18">
+<path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"></path>
+</svg>
+</div>
+<div class="absolute bottom-20 left-4 animate-sway-leaf text-lime-400 opacity-60 pointer-events-none" style="animation-delay: 2.2s;">
+<svg fill="currentColor" height="16" viewbox="0 0 24 24" width="16">
+<path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"></path>
+</svg>
+</div>
+<!-- Stylized Monk Bird Mascot Illustration -->
+<div class="relative w-56 h-56 sm:w-64 sm:h-64 flex items-center justify-center animate-float-mascot">
+<!-- Soft Character Glow Underneath -->
+<div class="absolute bottom-2 w-44 h-12 bg-primary-container/30 rounded-full blur-xl"></div>
+<!-- Stylized SVG 3D Monk-Bird -->
+<svg class="w-full h-full drop-shadow-2xl" fill="none" viewbox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<radialgradient cx="45%" cy="40%" id="bodySkin" r="55%">
+<stop offset="0%" stop-color="#fff1e5"></stop>
+<stop offset="65%" stop-color="#f8ceb5"></stop>
+<stop offset="100%" stop-color="#e8af90"></stop>
+</radialgradient>
+<lineargradient id="robeShade" x1="20%" x2="80%" y1="15%" y2="85%">
+<stop offset="0%" stop-color="#ff7f36"></stop>
+<stop offset="60%" stop-color="#f97316"></stop>
+<stop offset="100%" stop-color="#c2410c"></stop>
+</lineargradient>
+<radialgradient cx="35%" cy="30%" id="beadShader" r="65%">
+<stop offset="0%" stop-color="#7a4e32"></stop>
+<stop offset="65%" stop-color="#462816"></stop>
+<stop offset="100%" stop-color="#241208"></stop>
+</radialgradient>
+</defs>
+<!-- Outstretched Left Wing / Arm -->
+<path class="origin-right animate-wing-left" d="M72 135 C42 135 24 145 20 152 C24 158 48 160 76 150 Z" fill="url(#bodySkin)"></path>
+<!-- Outstretched Right Wing / Arm -->
+<path class="origin-left animate-wing-right" d="M188 135 C218 135 236 145 240 152 C236 158 212 160 184 150 Z" fill="url(#bodySkin)"></path>
+<!-- Monk Robe Body Base -->
+<path d="M70 140 C70 115 190 115 190 140 C202 180 195 208 178 215 C150 224 110 224 82 215 C65 208 58 180 70 140 Z" fill="url(#robeShade)"></path>
+<!-- Robe Drape Shawl -->
+<path d="M96 142 C120 162 140 178 142 220 C128 221 112 218 94 212 C86 186 88 160 96 142 Z" fill="#ea580c" opacity="0.85"></path>
+<path d="M142 142 C162 160 170 185 168 218 C176 215 183 208 185 198 C188 170 165 150 142 142 Z" fill="#ff924d" opacity="0.65"></path>
+<!-- Mascot Head (Cute Egg/Bird Form) -->
+<ellipse cx="130" cy="115" fill="url(#bodySkin)" rx="50" ry="55"></ellipse>
+<!-- Bindi / Third-Eye Mark -->
+<circle cx="130" cy="88" fill="#ea580c" r="3.5"></circle>
+<!-- Serene Closed Eyes -->
+<path d="M106 108 C110 114 118 114 122 108" fill="none" stroke="#331e15" stroke-linecap="round" stroke-width="3"></path>
+<path d="M138 108 C142 114 150 114 154 108" fill="none" stroke="#331e15" stroke-linecap="round" stroke-width="3"></path>
+<!-- Cute Orange Beak -->
+<path d="M125 116 C130 113 135 116 135 116 L130 128 Z" fill="#f97316"></path>
+<!-- Gentle Rosy Cheeks -->
+<circle cx="102" cy="118" fill="#f87171" opacity="0.45" r="6"></circle>
+<circle cx="158" cy="118" fill="#f87171" opacity="0.45" r="6"></circle>
+<!-- Prayer Beads Necklace (Mala Garland) -->
+<g>
+<circle cx="78" cy="128" fill="url(#beadShader)" r="8"></circle>
+<circle cx="89" cy="138" fill="url(#beadShader)" r="8.5"></circle>
+<circle cx="104" cy="146" fill="url(#beadShader)" r="9"></circle>
+<circle cx="121" cy="151" fill="url(#beadShader)" r="9.5"></circle>
+<circle cx="139" cy="151" fill="url(#beadShader)" r="9.5"></circle>
+<circle cx="156" cy="146" fill="url(#beadShader)" r="9"></circle>
+<circle cx="171" cy="138" fill="url(#beadShader)" r="8.5"></circle>
+<circle cx="182" cy="128" fill="url(#beadShader)" r="8"></circle>
+<!-- Front Loop Beads -->
+<circle cx="82" cy="116" fill="url(#beadShader)" r="7.5"></circle>
+<circle cx="92" cy="106" fill="url(#beadShader)" r="7.5"></circle>
+<circle cx="168" cy="106" fill="url(#beadShader)" r="7.5"></circle>
+<circle cx="178" cy="116" fill="url(#beadShader)" r="7.5"></circle>
+</g>
+<!-- Little Bird Feet Below Robe -->
+<path d="M110 220 L108 232 M108 232 L102 235 M108 232 L112 236" stroke="#f97316" stroke-linecap="round" stroke-width="3"></path>
+<path d="M150 220 L152 232 M152 232 L146 235 M152 232 L156 236" stroke="#f97316" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+</div>
+<!-- Peaceful Onboarding Caption & Status Pill -->
+<div class="mt-4 space-y-2">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Safe. Peaceful. Protected.</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xs mx-auto">
+              Start your zero-trust journey with continuous cryptographic verification and peace of mind.
+            </p>
+<div class="inline-flex items-center gap-2 rounded-full bg-surface-container-high px-3.5 py-1.5 mt-2">
+<span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+<span class="font-label-sm text-label-sm text-on-surface font-medium">Instant email verification next</span>
+</div>
+</div>
+<!-- Micro Security Feature Chips -->
+<div class="grid grid-cols-2 gap-2 w-full mt-6 pt-5 border-t border-surface-variant/40">
+<div class="flex items-center gap-2 p-2 rounded-xl bg-surface-container-highest/60 text-left">
+<span class="material-symbols-outlined text-primary text-[18px]">key</span>
+<div>
+<span class="block font-label-sm text-label-sm text-on-surface">FIDO2 Ready</span>
+<span class="block font-code-mono text-code-mono text-[10px] text-on-surface-variant">Passkey sync</span>
+</div>
+</div>
+<div class="flex items-center gap-2 p-2 rounded-xl bg-surface-container-highest/60 text-left">
+<span class="material-symbols-outlined text-tertiary text-[18px]">lock_reset</span>
+<div>
+<span class="block font-label-sm text-label-sm text-on-surface">Auto-Revoke</span>
+<span class="block font-code-mono text-code-mono text-[10px] text-on-surface-variant">Stale sessions</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Dynamic password visibility toggle specifically for Screen 2
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggleBtn = document.getElementById('toggleRegPassword');
+    const input = document.getElementById('regPassword');
+    const eyeIcon = document.getElementById('regEyeIcon');
+
+    if (toggleBtn && input && eyeIcon) {
+      toggleBtn.addEventListener('click', () => {
+        const isPass = input.type === 'password';
+        input.type = isPass ? 'text' : 'password';
+        eyeIcon.textContent = isPass ? 'visibility_off' : 'visibility';
+      });
+    }
+  });
+</script></main>
+<!-- END: MainContainer -->
+<!-- BEGIN: InteractiveScripts -->
+<!-- Password visibility toggle interaction -->
+<script data-purpose="password-visibility-handler">
+    document.addEventListener('DOMContentLoaded', () => {
+      const togglePasswordBtn = document.getElementById('togglePassword');
+      const passwordInput = document.getElementById('password');
+      const toggleIcon = document.getElementById('toggleIcon');
+
+      if (togglePasswordBtn && passwordInput && toggleIcon) {
+        togglePasswordBtn.addEventListener('click', () => {
+          const isPassword = passwordInput.getAttribute('type') === 'password';
+          passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+          
+          if (isPassword) {
+            toggleIcon.classList.remove('fa-eye-slash');
+            toggleIcon.classList.add('fa-eye');
+          } else {
+            toggleIcon.classList.remove('fa-eye');
+            toggleIcon.classList.add('fa-eye-slash');
+          }
+        });
+      }
+    });
+  </script>
+<!-- END: InteractiveScripts -->
+</body></html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login - SecureAuth</title>
+<!-- Tailwind CSS CDN with Forms Plugin -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- FontAwesome Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script data-purpose="tailwind-config" id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Outfit"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#fff7ed',
+              100: '#ffedd5',
+              200: '#fed7aa',
+              300: '#fdba74',
+              400: '#fb923c',
+              500: '#f97316',
+              600: '#ea580c',
+              700: '#c2410c',
+              dark: '#2c1e19',
+            },
+            mascot: {
+              cream: '#fbe9db',
+              bead: '#5c3a21',
+              robe: '#ff6720',
+              leaf: '#b4d33c',
+            }
+          },
+          boxShadow: {
+            'glass': '0 20px 50px -12px rgba(234, 88, 12, 0.12), 0 8px 24px -4px rgba(0, 0, 0, 0.04)',
+            'mascot': '0 25px 50px -12px rgba(180, 83, 9, 0.3)',
+            'bead': 'inset -3px -3px 6px rgba(0,0,0,0.5), inset 2px 2px 5px rgba(255,255,255,0.4)',
+            'btn': '0 10px 25px -5px rgba(234, 88, 12, 0.45)',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '50%': { transform: 'translateY(-12px) rotate(1deg)' },
+            },
+            leafSway: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '50%': { transform: 'translateY(-8px) rotate(12deg)' },
+            },
+            wingFlapLeft: {
+              '0%, 100%': { transform: 'rotate(-4deg)' },
+              '50%': { transform: 'rotate(2deg)' },
+            },
+            wingFlapRight: {
+              '0%, 100%': { transform: 'rotate(4deg)' },
+              '50%': { transform: 'rotate(-2deg)' },
+            }
+          },
+          animation: {
+            'float-mascot': 'float 5s ease-in-out infinite',
+            'sway-leaf': 'leafSway 4s ease-in-out infinite',
+            'wing-left': 'wingFlapLeft 3.5s ease-in-out infinite',
+            'wing-right': 'wingFlapRight 3.5s ease-in-out infinite',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-background-and-depth">
+    /* Subtle Clay/3D depth gradients mirroring reference */
+    .bg-peach-glow {
+      background: radial-gradient(circle at 65% 45%, #fedecb 0%, #fbd5bd 35%, #fce2d0 70%, #f7d6be 100%);
+    }
+    
+    .glass-backdrop-panel {
+      background: rgba(255, 255, 255, 0.28);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1.5px solid rgba(255, 255, 255, 0.65);
+    }
+
+    .form-card-glass {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(32px);
+      -webkit-backdrop-filter: blur(32px);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+    }
+
+    /* 3D clay effect on beads and character parts */
+    .clay-surface {
+      background: linear-gradient(145deg, #fff0e2 0%, #f8cfb5 100%);
+      box-shadow: inset -6px -6px 14px rgba(199, 120, 80, 0.35), inset 6px 6px 14px rgba(255, 255, 255, 0.9);
+    }
+
+    .robe-gradient {
+      background: linear-gradient(135deg, #ff7a2b 0%, #ea580c 60%, #c2410c 100%);
+      box-shadow: inset 4px 4px 10px rgba(255, 210, 180, 0.4), inset -8px -8px 16px rgba(130, 35, 0, 0.35);
+    }
+
+    .bead-item {
+      background: radial-gradient(circle at 35% 30%, #875738 0%, #523118 60%, #351c0b 100%);
+      box-shadow: 2px 5px 8px rgba(70, 30, 10, 0.45), inset 1px 2px 3px rgba(255, 255, 255, 0.4);
+    }
+  </style>
+<meta content="web_blank" name="shell-type"/></head>
+<body class="min-h-screen bg-peach-glow text-gray-800 flex items-center justify-center p-3 sm:p-6 md:p-10 font-sans relative overflow-x-hidden selection:bg-brand-200 selection:text-brand-700">
+<!-- Ambient background decorative floating orbs mirroring composition -->
+<div class="fixed -bottom-24 -left-24 w-96 h-96 rounded-full bg-[#f8be9a]/40 blur-3xl pointer-events-none -z-10"></div>
+<div class="fixed top-12 right-20 w-80 h-80 rounded-full bg-[#fedcc5]/60 blur-2xl pointer-events-none -z-10"></div>
+<!-- BEGIN: MainContainer -->
+<!-- Outer Frosted Stage matching the wide backdrop glass container in the reference -->
+<main class="w-full max-w-6xl glass-backdrop-panel rounded-[36px] sm:rounded-[48px] p-4 sm:p-8 lg:p-12 shadow-2xl relative overflow-hidden my-auto" data-purpose="authentication-stage"><div class="flex flex-col w-full">
+<div class="relative w-full flex flex-col items-center justify-center py-4 sm:py-8">
+<div class="absolute -top-16 -right-12 w-64 h-64 rounded-full bg-primary/10 blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-16 -left-12 w-72 h-72 rounded-full bg-tertiary/10 blur-3xl pointer-events-none"></div>
+<div class="relative z-10 w-full max-w-xl mx-auto bg-surface-container/95 backdrop-blur-2xl rounded-3xl p-6 sm:p-10 shadow-2xl transition-all duration-300">
+<div class="flex items-center justify-between gap-3 mb-8">
+<div class="flex items-center gap-2.5">
+<div class="w-10 h-10 rounded-xl bg-primary-container/20 flex items-center justify-center text-primary-container shadow-sm">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">shield_lock</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-title-md text-on-surface tracking-tight leading-none">SecureAuth</span>
+<span class="font-code-mono text-label-sm text-outline tracking-wider uppercase mt-1">Guard Core v4.2</span>
+</div>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-highest shadow-inner">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+<span class="font-code-mono text-label-sm text-tertiary tracking-widest uppercase">256-BIT ENCRYPTED</span>
+</div>
+</div>
+<div class="text-center mb-8">
+<div class="relative inline-flex items-center justify-center mb-4">
+<div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-primary-container/25 via-primary/20 to-tertiary/10 flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-[32px] text-primary-container" style="font-variation-settings: 'FILL' 1;">mark_email_read</span>
+</div>
+<div class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-surface-container-lowest flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[14px] text-tertiary">lock_reset</span>
+</div>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight mb-2">Verify Your Email</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-sm mx-auto leading-relaxed">
+          We've dispatched an authentication token to your verified mailbox
+        </p>
+<div class="mt-3.5 inline-flex items-center flex-wrap justify-center gap-2 px-3.5 py-1.5 rounded-xl bg-surface-container-lowest shadow-sm">
+<span class="font-code-mono text-body-sm text-on-surface select-all">a***n@uptoskills.com</span>
+<span class="text-outline text-body-sm">•</span>
+<button class="font-label-md text-body-sm text-primary hover:text-primary-container transition-colors duration-200" type="button">
+            Change email
+          </button>
+</div>
+</div>
+<form class="space-y-6" id="otpVerificationForm" onsubmit="event.preventDefault();">
+<div>
+<div class="flex items-center justify-between mb-3 px-1">
+<label class="font-label-md text-label-md text-on-surface-variant tracking-wide">Security Verification Code</label>
+<div class="inline-flex items-center gap-1.5 text-outline">
+<span class="material-symbols-outlined text-[15px]">content_paste</span>
+<span class="font-body-sm text-label-sm">Auto-paste ready</span>
+</div>
+</div>
+<div class="grid grid-cols-6 gap-2 sm:gap-3.5" id="otpContainer">
+<div class="relative">
+<input autocomplete="off" class="otp-digit w-full h-14 sm:h-16 text-center font-code-mono text-headline-sm text-on-surface bg-surface-container-lowest rounded-xl shadow-inner focus:outline-none transition-all duration-200" data-index="0" inputmode="numeric" maxlength="1" type="text" value="8"/>
+<div class="absolute bottom-1.5 left-3 right-3 h-0.5 rounded-full bg-primary-container"></div>
+</div>
+<div class="relative">
+<input autocomplete="off" class="otp-digit w-full h-14 sm:h-16 text-center font-code-mono text-headline-sm text-on-surface bg-surface-container-lowest rounded-xl shadow-inner focus:outline-none transition-all duration-200" data-index="1" inputmode="numeric" maxlength="1" type="text" value="4"/>
+<div class="absolute bottom-1.5 left-3 right-3 h-0.5 rounded-full bg-primary-container"></div>
+</div>
+<div class="relative">
+<input autocomplete="off" class="otp-digit w-full h-14 sm:h-16 text-center font-code-mono text-headline-sm text-on-surface bg-surface-container-lowest rounded-xl shadow-inner focus:outline-none transition-all duration-200" data-index="2" inputmode="numeric" maxlength="1" type="text" value="2"/>
+<div class="absolute bottom-1.5 left-3 right-3 h-0.5 rounded-full bg-primary-container"></div>
+</div>
+<div class="relative">
+<input autocomplete="off" class="otp-digit w-full h-14 sm:h-16 text-center font-code-mono text-headline-sm text-on-surface bg-surface-container-lowest rounded-xl shadow-inner focus:outline-none transition-all duration-200" data-index="3" inputmode="numeric" maxlength="1" type="text" value="0"/>
+<div class="absolute bottom-1.5 left-3 right-3 h-0.5 rounded-full bg-primary-container"></div>
+</div>
+<div class="relative">
+<input autocomplete="off" autofocus="" class="otp-digit w-full h-14 sm:h-16 text-center font-code-mono text-headline-sm text-on-surface bg-surface-container-high rounded-xl shadow-lg focus:outline-none transition-all duration-200 animate-pulse" data-index="4" inputmode="numeric" maxlength="1" type="text" value=""/>
+<div class="absolute bottom-1.5 left-3 right-3 h-0.5 rounded-full bg-tertiary"></div>
+</div>
+<div class="relative">
+<input autocomplete="off" class="otp-digit w-full h-14 sm:h-16 text-center font-code-mono text-headline-sm text-on-surface bg-surface-container-lowest rounded-xl shadow-inner focus:outline-none transition-all duration-200" data-index="5" inputmode="numeric" maxlength="1" type="text" value=""/>
+<div class="absolute bottom-1.5 left-3 right-3 h-0.5 rounded-full bg-surface-variant"></div>
+</div>
+</div>
+</div>
+<button class="w-full py-4 px-6 rounded-xl bg-primary-container hover:bg-primary-container/90 text-on-primary font-headline-sm text-title-md shadow-lg transition-all duration-200 flex items-center justify-center gap-2 group cursor-pointer" id="verifyBtn" type="submit">
+<span>Verify Email</span>
+<span class="material-symbols-outlined text-[20px] transition-transform duration-200 group-hover:translate-x-1">arrow_forward</span>
+</button>
+<div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 text-center sm:text-left">
+<div class="font-body-sm text-body-sm text-outline flex items-center gap-1.5">
+<span>Didn't receive the code?</span>
+<span class="font-code-mono text-primary font-medium" id="countdownLabel">Resend in <span id="timerSeconds">00:48</span></span>
+<button class="hidden font-label-md text-label-md text-primary hover:text-primary-container transition-colors" id="resendBtn" type="button">
+              Resend code
+            </button>
+</div>
+<button class="inline-flex items-center gap-1.5 font-label-md text-body-sm text-tertiary hover:text-tertiary-fixed transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">sms</span>
+<span>Send code via SMS</span>
+</button>
+</div>
+</form>
+<div class="mt-8 pt-6 bg-surface-container-low rounded-2xl p-4 shadow-sm space-y-2.5">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-outline text-[18px] mt-0.5">timer</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            One-time security passwords expire exactly <span class="text-on-surface font-medium">10 minutes</span> post-dispatch.
+          </p>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-outline text-[18px] mt-0.5">mark_email_unread</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Spam and filtered bulk folders may capture priority validation dispatches inadvertently.
+          </p>
+</div>
+</div>
+<div class="mt-6 pt-4 text-center">
+<a class="inline-flex items-center gap-2 font-label-md text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#signin">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+<span>Back to Sign in</span>
+</a>
+</div>
+</div>
+<div class="mt-6 flex items-center justify-center gap-6 text-outline font-body-sm text-label-sm">
+<span class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+        Zero-Knowledge Layer
+      </span>
+<span>•</span>
+<span>SOC2 Type II Compliant</span>
+<span>•</span>
+<span>WebAuthn Hardware Ready</span>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    const inputs = document.querySelectorAll('.otp-digit');
+    const timerSpan = document.getElementById('timerSeconds');
+    const countdownLabel = document.getElementById('countdownLabel');
+    const resendBtn = document.getElementById('resendBtn');
+    let timeLeft = 48;
+
+    inputs.forEach((input, index) => {
+      input.addEventListener('input', (e) => {
+        const val = e.target.value.replace(/[^0-9]/g, '');
+        e.target.value = val ? val[val.length - 1] : '';
+        if (val && index < inputs.length - 1) {
+          inputs[index + 1].focus();
+        }
+      });
+
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && !e.target.value && index > 0) {
+          inputs[index - 1].focus();
+        }
+      });
+
+      input.addEventListener('paste', (e) => {
+        e.preventDefault();
+        const pastedData = (e.clipboardData || window.clipboardData).getData('text').trim().replace(/[^0-9]/g, '');
+        if (pastedData) {
+          inputs.forEach((box, i) => {
+            box.value = pastedData[i] || '';
+          });
+          const nextEmpty = Math.min(pastedData.length, inputs.length - 1);
+          inputs[nextEmpty].focus();
+        }
+      });
+    });
+
+    const interval = setInterval(() => {
+      if (timeLeft <= 1) {
+        clearInterval(interval);
+        countdownLabel.classList.add('hidden');
+        resendBtn.classList.remove('hidden');
+      } else {
+        timeLeft--;
+        const formatted = timeLeft < 10 ? '0' + timeLeft : timeLeft;
+        timerSpan.textContent = '00:' + formatted;
+      }
+    }, 1000);
+
+    resendBtn.addEventListener('click', () => {
+      timeLeft = 60;
+      countdownLabel.classList.remove('hidden');
+      resendBtn.classList.add('hidden');
+      timerSpan.textContent = '01:00';
+    });
+  })();
+</script></main>
+<!-- END: MainContainer -->
+<!-- BEGIN: InteractiveScripts -->
+<!-- Password visibility toggle interaction -->
+<script data-purpose="password-visibility-handler">
+    document.addEventListener('DOMContentLoaded', () => {
+      const togglePasswordBtn = document.getElementById('togglePassword');
+      const passwordInput = document.getElementById('password');
+      const toggleIcon = document.getElementById('toggleIcon');
+
+      if (togglePasswordBtn && passwordInput && toggleIcon) {
+        togglePasswordBtn.addEventListener('click', () => {
+          const isPassword = passwordInput.getAttribute('type') === 'password';
+          passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+          
+          if (isPassword) {
+            toggleIcon.classList.remove('fa-eye-slash');
+            toggleIcon.classList.add('fa-eye');
+          } else {
+            toggleIcon.classList.remove('fa-eye');
+            toggleIcon.classList.add('fa-eye-slash');
+          }
+        });
+      }
+    });
+  </script>
+<!-- END: InteractiveScripts -->
+</body></html>

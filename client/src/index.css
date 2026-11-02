@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* Subtle Clay/3D depth gradients mirroring reference */
+.bg-peach-glow {
+  background: radial-gradient(circle at 65% 45%, #fedecb 0%, #fbd5bd 35%, #fce2d0 70%, #f7d6be 100%);
+}
+
+.glass-backdrop-panel {
+  background: rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1.5px solid rgba(255, 255, 255, 0.65);
+}
+
+.form-card-glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+}
+
+/* 3D clay effect on beads and character parts */
+.clay-surface {
+  background: linear-gradient(145deg, #fff0e2 0%, #f8cfb5 100%);
+  box-shadow: inset -6px -6px 14px rgba(199, 120, 80, 0.35), inset 6px 6px 14px rgba(255, 255, 255, 0.9);
+}
+
+.robe-gradient {
+  background: linear-gradient(135deg, #ff7a2b 0%, #ea580c 60%, #c2410c 100%);
+  box-shadow: inset 4px 4px 10px rgba(255, 210, 180, 0.4), inset -8px -8px 16px rgba(130, 35, 0, 0.35);
+}
+
+.bead-item {
+  background: radial-gradient(circle at 35% 30%, #875738 0%, #523118 60%, #351c0b 100%);
+  box-shadow: 2px 5px 8px rgba(70, 30, 10, 0.45), inset 1px 2px 3px rgba(255, 255, 255, 0.4);
+}

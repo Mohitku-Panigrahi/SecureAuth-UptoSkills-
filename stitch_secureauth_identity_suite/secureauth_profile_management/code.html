@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Plus+Jakarta+Sans:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"outline":"#a78b7d","surface-container-lowest":"#0a0e18","on-primary-container":"#582200","inverse-on-surface":"#2c303b","surface":"#0f131d","surface-bright":"#353944","on-primary":"#552100","primary-container":"#f97316","surface-container-highest":"#313540","tertiary-container":"#00a9c5","error-container":"#93000a","inverse-surface":"#dfe2f1","on-tertiary-container":"#003842","surface-tint":"#ffb690","on-primary-fixed-variant":"#783200","on-secondary-fixed":"#07006c","outline-variant":"#584237","on-tertiary-fixed-variant":"#004e5c","on-secondary":"#1000a9","tertiary":"#4cd7f6","on-primary-fixed":"#341100","primary-fixed-dim":"#ffb690","inverse-primary":"#9d4300","surface-container":"#1c1f2a","secondary-fixed":"#e1e0ff","on-error-container":"#ffdad6","tertiary-fixed-dim":"#4cd7f6","on-tertiary":"#003640","on-surface-variant":"#e0c0b1","surface-container-low":"#171b26","primary-fixed":"#ffdbca","background":"#0f131d","tertiary-fixed":"#acedff","secondary":"#c0c1ff","on-tertiary-fixed":"#001f26","on-secondary-container":"#b0b2ff","surface-container-high":"#262a35","surface-variant":"#313540","surface-dim":"#0f131d","primary":"#ffb690","error":"#ffb4ab","secondary-container":"#3131c0","on-background":"#dfe2f1","on-surface":"#dfe2f1","on-secondary-fixed-variant":"#2f2ebe","on-error":"#690005","secondary-fixed-dim":"#c0c1ff"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"space-xs":"0.25rem","space-sm":"0.5rem","space-md":"1rem","gutter":"1.5rem","space-lg":"1.5rem","margin":"2rem","space-xl":"2.5rem"},fontFamily:{"headline-lg":["Plus Jakarta Sans"],"body-md":["Inter"],"code-mono":["JetBrains Mono"],"display-hero":["Plus Jakarta Sans"],"label-md":["Inter"],"headline-sm":["Plus Jakarta Sans"],"body-lg":["Inter"],"headline-md":["Plus Jakarta Sans"],"title-md":["Plus Jakarta Sans"],"label-sm":["Inter"],"display-hero-mobile":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"body-sm":["Inter"]},fontSize:{"headline-lg":["36px",{lineHeight:"44px",letterSpacing:"-0.025em",fontWeight:"700"}],"body-md":["14px",{lineHeight:"22px",letterSpacing:"0em",fontWeight:"400"}],"code-mono":["13px",{lineHeight:"20px",letterSpacing:"-0.01em",fontWeight:"500"}],"display-hero":["56px",{lineHeight:"64px",letterSpacing:"-0.03em",fontWeight:"800"}],"label-md":["13px",{lineHeight:"18px",letterSpacing:"0.01em",fontWeight:"500"}],"headline-sm":["20px",{lineHeight:"28px",letterSpacing:"-0.015em",fontWeight:"600"}],"body-lg":["16px",{lineHeight:"26px",letterSpacing:"-0.005em",fontWeight:"400"}],"headline-md":["24px",{lineHeight:"32px",letterSpacing:"-0.02em",fontWeight:"600"}],"title-md":["16px",{lineHeight:"24px",letterSpacing:"-0.01em",fontWeight:"600"}],"label-sm":["11px",{lineHeight:"16px",letterSpacing:"0.04em",fontWeight:"600"}],"display-hero-mobile":["36px",{lineHeight:"44px",letterSpacing:"-0.025em",fontWeight:"800"}],"headline-lg-mobile":["28px",{lineHeight:"36px",letterSpacing:"-0.02em",fontWeight:"700"}],"body-sm":["12px",{lineHeight:"18px",letterSpacing:"0.005em",fontWeight:"400"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface relative min-h-screen selection:bg-primary-container selection:text-on-primary"><div class="fixed inset-0 pointer-events-none z-0 overflow-hidden"><div class="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-secondary-container/20 blur-[140px]"></div><div class="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-primary-container/15 blur-[160px]"></div><div class="absolute top-1/3 left-1/2 -translate-x-1/2 w-80 h-80 rounded-full bg-tertiary-container/10 blur-[130px]"></div></div><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low/85 backdrop-blur-xl z-50 flex flex-col justify-between py-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col gap-space-lg"><div class="px-space-lg flex items-center gap-space-sm"><img alt="SecureAuth Brand Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WEBCYis4gXKB1zFvgGtXODUex9dO9nYzAhBf-pVjM2SmAlTSLKiqo8cfpIRekZl6t_QZFmYEFle2CNxHF78jlA0fbg35YW_WZRCvnMvAt0e_VtTR68lqgsYuxjIrnMa4BcwFNblcUtI3OnDk7IX22l8nba4JmmeM9f5qO7cetAHfCxSAUwTgGtlJSmQ6JJ5iTgQ_9Dz8ph5abSjwLqiOmrx_9f_8bALf-Rvb6Hv2jzCA"/><span class="font-title-md text-title-md text-on-surface tracking-tight font-bold">SecureAuth</span></div><div class="px-space-lg"><div class="flex items-center gap-space-sm px-space-md py-space-xs rounded-full bg-surface-container-high/80 w-fit"><span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span><span class="font-label-sm text-label-sm text-tertiary uppercase tracking-wider">Zero-Trust Mesh</span></div></div><nav class="flex flex-col gap-space-xs px-space-md" data-active-classes="bg-primary-container text-on-primary font-bold rounded-lg"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="font-label-md text-label-md">Dashboard</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="my-profile" href="#"><span class="material-symbols-outlined text-[20px]">person</span><span class="font-label-md text-label-md">My Profile</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="account-security" href="#"><span class="material-symbols-outlined text-[20px]">security</span><span class="font-label-md text-label-md">Account Security</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="settings" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-label-md text-label-md">Settings</span></a></nav></div><div class="px-space-md"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="logout" href="#"><span class="material-symbols-outlined text-[20px]">logout</span><span class="font-label-md text-label-md">Logout</span></a></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs text-on-surface-variant font-label-md text-label-md"><span>Console</span><span class="material-symbols-outlined text-[16px]">chevron_right</span><span class="text-on-surface font-semibold">Security Engine</span></div><div class="flex items-center gap-space-xs px-space-sm py-0.5 rounded-full bg-tertiary-container/20 text-tertiary font-label-sm text-label-sm"><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span><span>VERIFIED SESSION</span></div></div><div class="flex items-center gap-space-md"><button class="p-space-xs rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all relative" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary"></span></button><div class="flex items-center gap-space-sm pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-surface-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCP1w7s0juF3-P1MAzAVtpsPCNMD4Gkgq-QU9ntXOmf9-25aObKN3L6LeUXL0mJL8c6-TVPm7eDdovLyY6dAIpERsCD0V7f_UH8yYmOv_n3AR5d9rVkfZ3wMFWWwobJX3I0jlKmfW7OJKCds7zKQgz6a0wtuykatSJNS0LNIkXIWufPRm8m06_k26JVilD7IMWtSnOanNlBXIwniCplLFzW0SZPRXMbEAw2_Cs1OJr5"/><span class="material-symbols-outlined text-on-surface-variant text-[18px]">expand_more</span></div></div></header><main class="relative pt-16 w-full px-8 bg-transparent min-h-screen"><div class="flex flex-col w-full pb-16">
+<!-- Ensure Sidebar 'My Profile' reflects active navigation -->
+<script>
+    (function activateSidebarTab() {
+      const links = document.querySelectorAll('aside nav a');
+      links.forEach(link => {
+        if (link.getAttribute('data-path') === 'my-profile') {
+          link.className = 'flex items-center gap-space-sm px-space-md py-space-sm rounded-lg bg-primary-container text-on-primary font-bold shadow-sm transition-all';
+        } else if (link.getAttribute('data-path') === 'dashboard') {
+          link.className = 'flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all';
+        }
+      });
+    })();
+  </script>
+<!-- Ambient Section Lighting (Contained) -->
+<div class="relative w-full">
+<div class="absolute -top-10 left-1/4 w-96 h-48 bg-secondary-container/15 rounded-full blur-[110px] pointer-events-none"></div>
+<div class="absolute top-20 right-10 w-72 h-44 bg-tertiary-container/10 rounded-full blur-[90px] pointer-events-none"></div>
+<!-- Header & Subheader Zone with Contextual Breadcrumb -->
+<div class="flex flex-col gap-space-sm pt-space-md pb-space-lg">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-md text-label-md">
+<span>Console</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span>User Settings</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-semibold">Profile Management</span>
+</div>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mt-space-xs">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Identity &amp; Profile</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Manage personal identifiers, cryptographic mesh attributes, and enterprise directory links.</p>
+</div>
+<!-- Sync status pill banner -->
+<div class="flex items-center gap-space-sm px-space-md py-space-xs rounded-full bg-surface-container-low backdrop-blur-md shadow-sm">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Profile synchronized with <span class="text-tertiary font-medium">UpToSkills directory</span> at 10:42 AM</span>
+</div>
+</div>
+</div>
+<!-- Main Grid Content: Bento Architecture -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter mt-space-sm">
+<!-- LEFT COLUMN: Avatar, Directory Sync & Organization Credentials (4 Cols) -->
+<div class="lg:col-span-4 flex flex-col gap-gutter">
+<!-- Avatar Management Card -->
+<div class="p-space-lg rounded-xl bg-surface-container/70 backdrop-blur-xl shadow-md flex flex-col gap-space-md relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant">Biometric Portrait</span>
+<span class="px-space-xs py-0.5 rounded-full bg-surface-container-highest font-code-mono text-label-sm text-tertiary">ID: AM-8492</span>
+</div>
+<div class="flex flex-col items-center text-center mt-space-sm">
+<div class="relative group">
+<img class="w-32 h-32 rounded-full object-cover shadow-xl ring-4 ring-surface-container-highest" data-alt="Photorealistic portrait of Alex Morgan, a friendly young software engineering intern with glasses, smiling warmly against a dark studio background illuminated by soft cyan and coral rim lighting, wearing a minimalist black turtleneck, ultra-sharp focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBd2PnJpZoxV-zV5RPX5SiZuMtl2qbvPMvTvkNdsJ-F3RwAG2gyqlt2FKY6svpsIljQ48TLkyoSi1JQG6FAb_EQfrAS5TaVdixGnYWC1zo5HK57tDpFbbt25JvHAhQmJb2MwxyGPCXduo2YMYMQBWF6vCkmhxOU4rfm0_Wtjd4zU2R6LcnYbbZd12rhR4b7i3togQnZD8R5o7FcMqWUIuHEjExpnFeM8u__mccJzy_q"/>
+<button aria-label="Quick upload picture" class="absolute bottom-1 right-1 p-2 rounded-full bg-primary-container text-on-primary shadow-lg hover:scale-105 active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[18px]">photo_camera</span>
+</button>
+</div>
+<div class="mt-space-md">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Alex Morgan</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Software Engineering Intern</p>
+</div>
+<div class="flex items-center gap-space-xs mt-space-sm px-space-sm py-1 rounded-full bg-surface-container-high/60">
+<span class="material-symbols-outlined text-tertiary text-[16px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-label-sm text-label-sm text-tertiary">SSO Token Cryptographically Valid</span>
+</div>
+</div>
+<!-- Avatar Actions -->
+<div class="flex items-center justify-center gap-space-sm mt-space-sm pt-space-md">
+<button class="flex-1 py-space-sm px-space-md rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-bright transition-all flex items-center justify-center gap-space-xs shadow-sm" type="button">
+<span class="material-symbols-outlined text-[16px]">cloud_upload</span>
+<span>Upload Picture</span>
+</button>
+<button class="py-space-sm px-space-md rounded-lg bg-surface-container-low text-error font-label-md text-label-md hover:bg-error-container/30 transition-all flex items-center justify-center" title="Remove profile image" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant/80 text-center leading-relaxed">
+            Accepts PNG, JPG or WEBP up to 5MB. Recommended dimension 400×400px.
+          </p>
+</div>
+<!-- Organization & Team Details Card -->
+<div class="p-space-lg rounded-xl bg-surface-container/70 backdrop-blur-xl shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary text-[20px]">corporate_fare</span>
+<h2 class="font-title-md text-title-md text-on-surface">Organization Profile</h2>
+</div>
+<span class="px-space-xs py-0.5 rounded-full bg-secondary-container/30 text-secondary font-label-sm text-label-sm font-semibold">Synced</span>
+</div>
+<div class="space-y-space-md">
+<!-- Team Node -->
+<div class="flex flex-col gap-0.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Assigned Unit</span>
+<div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low">
+<span class="font-body-md text-body-md text-on-surface font-medium">Engineering Cohort • Team Auth</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">domain</span>
+</div>
+</div>
+<!-- Employee ID -->
+<div class="flex flex-col gap-0.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Directory Badge ID</span>
+<div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low">
+<span class="font-code-mono text-code-mono text-primary font-bold">SEC-8492-AM</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">badge</span>
+</div>
+</div>
+<!-- Joined Date -->
+<div class="flex flex-col gap-0.5">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Cohort Induction</span>
+<div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low">
+<span class="font-body-md text-body-md text-on-surface font-medium">October 14, 2024</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">calendar_today</span>
+</div>
+</div>
+</div>
+<!-- Micro Security Audit Snapshot -->
+<div class="mt-space-xs p-space-sm rounded-lg bg-surface-container-lowest/80 flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary text-[18px]">fingerprint</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Passkey Mesh Trust Score</span>
+</div>
+<span class="font-code-mono text-label-sm text-tertiary font-bold">99.8%</span>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: Personal Information Editable Form (8 Cols) -->
+<div class="lg:col-span-8 flex flex-col gap-gutter">
+<div class="p-space-lg rounded-xl bg-surface-container/70 backdrop-blur-xl shadow-md flex flex-col gap-space-lg">
+<div class="flex items-center justify-between">
+<div>
+<h2 class="font-title-md text-title-md text-on-surface">Personal Information</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Update credentials, cryptographic contact endpoints, and profile bio visible across team channels.</p>
+</div>
+<div class="flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+<span>Workspace Managed</span>
+</div>
+</div>
+<form class="flex flex-col gap-space-md" id="profileForm" onsubmit="event.preventDefault(); triggerSaveFeedback();">
+<!-- Row 1: Full Name & Job Title -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface font-semibold flex items-center justify-between" for="fullName">
+<span>Full Legal Name</span>
+<span class="text-tertiary font-normal text-label-sm">Primary</span>
+</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">person</span>
+<input class="w-full h-11 pl-10 pr-space-md rounded-lg bg-surface-container-lowest/80 text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-tertiary transition-all" id="fullName" placeholder="First &amp; Last Name" type="text" value="Alex Morgan"/>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="jobTitle">Job Title / Role</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">work</span>
+<input class="w-full h-11 pl-10 pr-space-md rounded-lg bg-surface-container-lowest/80 text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-tertiary transition-all" id="jobTitle" placeholder="Organizational role" type="text" value="Software Engineering Intern"/>
+</div>
+</div>
+</div>
+<!-- Row 2: Work Email (Locked / Read-only) & Direct Phone -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Managed Work Email -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-1" for="workEmail">
+<span>Work Email Address</span>
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant" title="Organization Locked">lock</span>
+</label>
+<span class="px-space-xs py-0.5 rounded-full bg-tertiary-container/20 text-tertiary font-label-sm text-label-sm flex items-center gap-1 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span>Verified</span>
+</span>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">alternate_email</span>
+<input class="w-full h-11 pl-10 pr-10 rounded-lg bg-surface-container-high/40 text-on-surface-variant font-code-mono text-body-md cursor-not-allowed select-all" id="workEmail" readonly="" type="email" value="alex.morgan@uptoskills.mesh"/>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[16px]">lock_clock</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">info</span>
+<span>Managed by UpToSkills workspace organization.</span>
+</p>
+</div>
+<!-- Direct Phone Number -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="phoneNumber">Direct Phone Number</label>
+<span class="px-space-xs py-0.5 rounded-full bg-tertiary-container/20 text-tertiary font-label-sm text-label-sm flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-[12px]">sms</span>
+<span>SMS Verified</span>
+</span>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">call</span>
+<input class="w-full h-11 pl-10 pr-space-md rounded-lg bg-surface-container-lowest/80 text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-tertiary transition-all" id="phoneNumber" placeholder="+1 (000) 000-0000" type="tel" value="+1 (555) 389-2041"/>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Designated backup channel for zero-trust fallback MFA.</p>
+</div>
+</div>
+<!-- Row 3: Location & Date of Birth -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="locationInput">Assigned Region / Location</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">location_on</span>
+<input class="w-full h-11 pl-10 pr-space-md rounded-lg bg-surface-container-lowest/80 text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-tertiary transition-all" id="locationInput" placeholder="City, Country or Timezone" type="text" value="San Francisco, CA (PST)"/>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="dobInput">Date of Birth</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">cake</span>
+<input class="w-full h-11 pl-10 pr-space-md rounded-lg bg-surface-container-lowest/80 text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-tertiary transition-all" id="dobInput" placeholder="Month Day, Year" type="text" value="March 14, 1999"/>
+</div>
+</div>
+</div>
+<!-- Row 4: Bio / Professional Summary Textarea -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface font-semibold" for="userBio">Professional Summary &amp; Bio</label>
+<span class="font-label-sm text-label-sm text-on-surface-variant" id="charCount">104 / 300</span>
+</div>
+<div class="relative">
+<textarea class="w-full p-space-md rounded-lg bg-surface-container-lowest/80 text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-tertiary transition-all leading-relaxed resize-none" id="userBio" maxlength="300" oninput="document.getElementById('charCount').textContent = this.value.length + ' / 300';" rows="4">Software developer passionate about zero-trust identity, authentication systems, and cloud infrastructure.</textarea>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Visible in identity claim tokens across verified federation endpoints.</p>
+</div>
+<!-- Form Action Footer -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md pt-space-lg mt-space-sm border-t-0">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px] text-tertiary">lock_reset</span>
+<span>All parameter modifications are signed via hardware key.</span>
+</div>
+<div class="flex items-center gap-space-sm w-full sm:w-auto justify-end">
+<button class="px-space-lg py-space-sm rounded-lg bg-transparent text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-md text-label-md transition-all" onclick="document.getElementById('profileForm').reset();" type="button">
+                  Cancel
+                </button>
+<button class="px-space-xl py-space-sm rounded-lg bg-primary-container text-on-primary font-label-md text-label-md font-bold shadow-md hover:bg-opacity-90 active:scale-98 transition-all flex items-center gap-space-xs" type="submit">
+<span class="material-symbols-outlined text-[18px]">check</span>
+<span>Save Changes</span>
+</button>
+</div>
+</div>
+</form>
+</div>
+<!-- Integrated Secondary Security Card: Active Federation Status -->
+<div class="p-space-lg rounded-xl bg-surface-container/70 backdrop-blur-xl shadow-md flex items-center justify-between">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[24px]">hub</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">UpToSkills IAM Mesh Connection</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Federated through Okta Zero-Trust Bridge. Identity updates propagate instantly across all nodes.</p>
+</div>
+</div>
+<span class="px-space-md py-space-xs rounded-full bg-tertiary-container/20 text-tertiary font-label-sm text-label-sm font-semibold uppercase tracking-wider flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+            Live Node
+          </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive notification toast element (Hidden by default, triggered on save) -->
+<div class="fixed bottom-8 right-8 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none" id="saveToast">
+<div class="flex items-center gap-space-md px-space-lg py-space-md rounded-xl bg-surface-container-highest/95 backdrop-blur-xl shadow-2xl text-on-surface">
+<div class="w-8 h-8 rounded-full bg-tertiary-container/30 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[20px]">task_alt</span>
+</div>
+<div>
+<p class="font-title-md text-title-md text-on-surface font-semibold">Changes Synchronized</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Profile values broadcasted to UpToSkills directory mesh.</p>
+</div>
+</div>
+</div>
+<!-- Script for feedback interactivity -->
+<script>
+    function triggerSaveFeedback() {
+      const toast = document.getElementById('saveToast');
+      if (!toast) return;
+      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3500);
+    }
+  </script>
+</div></main></div></body></html>
